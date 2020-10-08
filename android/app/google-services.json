@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "990774021909",
+    "firebase_url": "https://quickci.firebaseio.com",
+    "project_id": "quickci",
+    "storage_bucket": "quickci.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:990774021909:android:bf90909adba2ffdb94e31c",
+        "android_client_info": {
+          "package_name": "co.modware.quick_ci"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "990774021909-lnvoh2b7i0cpthkisvus07a420r5780l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "co.modware.quick_ci",
+            "certificate_hash": "ca72e66c785fcf992bc27b1bfd43f812c5e791c2"
+          }
+        },
+        {
+          "client_id": "990774021909-e4biahokpiip2m736g6v8i8a495d98f6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLBXVLh47WEKmj5MpzFg7sPblv3f2pn5A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "990774021909-e4biahokpiip2m736g6v8i8a495d98f6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
