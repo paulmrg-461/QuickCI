@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:quick_ci/Product/model/product.dart';
+import 'package:quick_ci/Product/ui/widgets/card_product.dart';
 import 'package:quick_ci/User/model/user.dart';
 
 class CloudFirestoreAPI {
@@ -18,5 +20,18 @@ class CloudFirestoreAPI {
       'myPlaces': user.myShoppingCart,
       'lastSignIn': DateTime.now()
     }, merge: true);
+  }
+
+  List<CardProduct> buildProducts(List<DocumentSnapshot> productsListSnapshot) {
+    List<CardProduct> cardProducts = List<CardProduct>();
+    productsListSnapshot.forEach((p) {
+      cardProducts.add(CardProduct(Product(
+          name: p.data["name"],
+          barcode: p.data["barcode"].toString(),
+          price: p.data["price"].toString(),
+          photoUrl: p.data["category"],
+          quantity: p.data["quantity"].toString())));
+    });
+    return cardProducts;
   }
 }

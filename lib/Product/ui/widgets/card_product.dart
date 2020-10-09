@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:quick_ci/Product/model/product.dart';
 
 class CardProduct extends StatelessWidget {
+  Product product;
+  CardProduct(this.product);
+
   @override
   Widget build(BuildContext context) {
-    final _screenSize = MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 18.0),
+      margin: EdgeInsets.symmetric(horizontal: 18.0, vertical: 6.0),
       padding: EdgeInsets.all(12.0),
       width: double.infinity,
       //height: _screenSize.height * 0.12,
@@ -58,6 +61,7 @@ class CardProduct extends StatelessWidget {
   }
 
   Widget _productDetails(BuildContext context) {
+    final productBarcode = product.barcode.toString();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -66,7 +70,7 @@ class CardProduct extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width * 0.6,
             child: Text(
-              "Queso Tajado Bármelas 200gr",
+              product.name,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.left,
               style: TextStyle(
@@ -90,7 +94,7 @@ class CardProduct extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "\$7.900",
+                        "\$${product.price}",
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.left,
                         style: TextStyle(
@@ -101,7 +105,7 @@ class CardProduct extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "PLU: 770778454566",
+                        "PLU: ${product.barcode}",
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.left,
                         style: TextStyle(

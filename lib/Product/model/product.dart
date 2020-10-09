@@ -5,7 +5,7 @@ class Product {
   String barcode;
   String price;
   String photoUrl;
-  int quantity;
+  String quantity;
 
   Product({
     Key key,
