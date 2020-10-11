@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
@@ -19,12 +21,23 @@ class UserBloc implements Bloc {
   void updateUserData(User user) =>
       _cloudFirestoreRepository.updateUserDataFirestore(user);
 
-  Stream<QuerySnapshot> productsListStream =
-      Firestore.instance.collection(CloudFirestoreAPI().PRODUCTS).snapshots();
+  Stream<QuerySnapshot> productsListStream = Firestore.instance
+      .collection(CloudFirestoreAPI().PRODUCTS)
+      .orderBy("name")
+      .snapshots();
   Stream<QuerySnapshot> get productsStream => productsListStream;
   List<CardProduct> buildProducts(
           List<DocumentSnapshot> productsListSnapshot) =>
       _cloudFirestoreRepository.buildProducts(productsListSnapshot);
+
+  /* Stream<QuerySnapshot> productByBarcode(String barcode) => Firestore.instance
+      .collection(CloudFirestoreAPI().PRODUCTS)
+      .where("barcode", isEqualTo: barcode)
+      .snapshots(); */
+
+  StreamController productSelectedStreamController = StreamController();
+  Stream get productSelectedStream => productSelectedStreamController.stream;
+  StreamSink get productSelectedSink => productSelectedStreamController.sink;
 
   signOut() {
     _auth_repository.signOut();

@@ -4,6 +4,7 @@ class OreangeButton extends StatefulWidget {
   final String text;
   double width = 0.0;
   double height = 0.0;
+  final double radius;
   final VoidCallback onPressed;
 
   OreangeButton(
@@ -11,7 +12,8 @@ class OreangeButton extends StatefulWidget {
       @required this.text,
       @required this.onPressed,
       this.height,
-      this.width});
+      this.width,
+      @required this.radius});
 
   @override
   _OreangeButtonState createState() => _OreangeButtonState();
@@ -23,11 +25,11 @@ class _OreangeButtonState extends State<OreangeButton> {
     return InkWell(
       onTap: widget.onPressed,
       child: Container(
-        margin: EdgeInsets.only(top: 30.0, left: 20.0, right: 20.0),
+        margin: EdgeInsets.only(top: 30.0, left: 18.0, right: 18.0),
         width: widget.width,
         height: widget.height,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.0),
+            borderRadius: BorderRadius.circular(widget.radius),
             gradient: LinearGradient(
                 colors: [
                   Color(0xFFE64A19), //arriba

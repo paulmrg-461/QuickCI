@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class Product {
   String name;
   String barcode;
-  String price;
+  int price;
   String photoUrl;
   String quantity;
 

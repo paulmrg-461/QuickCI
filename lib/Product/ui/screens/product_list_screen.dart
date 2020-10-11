@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:quick_ci/Product/ui/screens/product_content.dart';
+import 'package:quick_ci/Product/ui/screens/product_detail_content.dart';
 import 'package:quick_ci/Product/ui/screens/product_header.dart';
-import 'package:quick_ci/Product/ui/widgets/card_product.dart';
 import 'package:quick_ci/User/bloc/user_bloc.dart';
 
 class ProductListScreen extends StatefulWidget {
@@ -26,6 +26,10 @@ class _ProductListScreenState extends State<ProductListScreen> {
       barcodeScanRes = 'Failed to get platform version.';
     }
     if (!mounted) return;
+    if (int.parse(barcodeScanRes) > 1) {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => ProductDetailContent()));
+    }
 
     setState(() {
       _barcode = barcodeScanRes;
@@ -37,7 +41,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
     userBloc = BlocProvider.of<UserBloc>(context);
     return Scaffold(
       floatingActionButton: Container(
-        padding: EdgeInsets.only(bottom: 50.0),
+        padding: EdgeInsets.only(bottom: 46.0),
         child: FloatingActionButton(
           child: Icon(
             Icons.qr_code,
@@ -58,26 +62,4 @@ class _ProductListScreenState extends State<ProductListScreen> {
       ),
     );
   }
-
-  /* 
-  StreamBuilder(
-          stream: userBloc.productsStream,
-          builder: (context, AsyncSnapshot snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.waiting:
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              case ConnectionState.none:
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              case ConnectionState.active:
-
-              case ConnectionState.done:
-              default: 
-            }
-          }),
-  
-   */
 }

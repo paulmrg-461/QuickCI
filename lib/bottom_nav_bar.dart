@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:quick_ci/Product/ui/screens/product_list_screen.dart';
-import 'package:quick_ci/ShoppingCart/ui/screens/barcode_reader_screen.dart';
 import 'package:quick_ci/ShoppingCart/ui/screens/shopping_cart_screen.dart';
 import 'package:quick_ci/User/ui/screens/profile_screen.dart';
 

@@ -77,6 +77,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 },
                 width: MediaQuery.of(context).size.width * 0.75,
                 height: 50.0,
+                radius: 15.0,
               )
             ],
           )

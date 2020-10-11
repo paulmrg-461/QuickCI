@@ -28,7 +28,7 @@ class CloudFirestoreAPI {
       cardProducts.add(CardProduct(Product(
           name: p.data["name"],
           barcode: p.data["barcode"].toString(),
-          price: p.data["price"].toString(),
+          price: p.data["price"],
           photoUrl: p.data["category"],
           quantity: p.data["quantity"].toString())));
     });
