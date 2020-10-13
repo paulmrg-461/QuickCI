@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
+import 'package:quick_ci/Product/model/product.dart';
 import 'package:quick_ci/Product/ui/screens/product_content.dart';
-import 'package:quick_ci/Product/ui/screens/product_detail_content.dart';
+import 'package:quick_ci/Product/ui/screens/product_detail_screen.dart';
 import 'package:quick_ci/Product/ui/screens/product_header.dart';
 import 'package:quick_ci/User/bloc/user_bloc.dart';
 
@@ -13,6 +14,7 @@ class ProductListScreen extends StatefulWidget {
 }
 
 UserBloc userBloc;
+Product product;
 
 class _ProductListScreenState extends State<ProductListScreen> {
   String _barcode = '';
@@ -27,8 +29,10 @@ class _ProductListScreenState extends State<ProductListScreen> {
     }
     if (!mounted) return;
     if (int.parse(barcodeScanRes) > 1) {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => ProductDetailContent()));
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ProductDetailScreen(barcodeScanRes)));
     }
 
     setState(() {

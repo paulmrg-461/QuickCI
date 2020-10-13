@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
+import 'package:quick_ci/Product/model/product.dart';
 import 'package:quick_ci/Product/ui/widgets/card_product.dart';
+import 'package:quick_ci/Product/ui/widgets/product_detail_content.dart';
 import 'package:quick_ci/User/model/user.dart';
 import 'package:quick_ci/User/repository/auth_repository.dart';
 import 'package:quick_ci/User/repository/cloud_firestore_API.dart';
@@ -30,12 +32,25 @@ class UserBloc implements Bloc {
           List<DocumentSnapshot> productsListSnapshot) =>
       _cloudFirestoreRepository.buildProducts(productsListSnapshot);
 
-  /* Stream<QuerySnapshot> productByBarcode(String barcode) => Firestore.instance
-      .collection(CloudFirestoreAPI().PRODUCTS)
-      .where("barcode", isEqualTo: barcode)
+  /*  Stream<QuerySnapshot> productByBarcode(String barcode) => Firestore.instance
+      .collection("products")
+      .where("barcode",
+          isEqualTo: Firestore.instance.document("products/${barcode}"))
       .snapshots(); */
 
-  StreamController productSelectedStreamController = StreamController();
+  Stream<QuerySnapshot> productByBarcode(String barcode) => Firestore.instance
+      .collection("products")
+      .where("barcode", isEqualTo: barcode)
+      .snapshots();
+
+  List<ProductDetailContent> buildProductByBarcode(
+          List<DocumentSnapshot> productByBarcodeSnapshot) =>
+      _cloudFirestoreRepository.buildProductByBarcode(productByBarcodeSnapshot);
+  /* Stream<QuerySnapshot> get productByBarcodeStream => productByBarcode(barcode);
+  
+ */
+  StreamController<Product> productSelectedStreamController =
+      StreamController<Product>();
   Stream get productSelectedStream => productSelectedStreamController.stream;
   StreamSink get productSelectedSink => productSelectedStreamController.sink;
 
@@ -44,5 +59,7 @@ class UserBloc implements Bloc {
   }
 
   @override
-  void dispose() {}
+  void dispose() {
+    productSelectedStreamController.close();
+  }
 }

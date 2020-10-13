@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:quick_ci/Product/model/product.dart';
 import 'package:quick_ci/widgets/counter_button.dart';
 
 class ProductDetailContent extends StatefulWidget {
+  Product product;
+  ProductDetailContent(this.product);
+
   @override
   _ProductDetailContentState createState() => _ProductDetailContentState();
 }
@@ -52,7 +56,10 @@ class _ProductDetailContentState extends State<ProductDetailContent> {
                       icon: Icon(Icons.close),
                       iconSize: 32,
                       color: Colors.black54,
-                      onPressed: () => Navigator.pop(context)),
+                      onPressed: () {
+                        //userBloc.productSelectedStreamController.onCancel;
+                        Navigator.pop(context);
+                      }),
                 ),
                 Text(
                   "Detalle del producto",
@@ -106,7 +113,7 @@ class _ProductDetailContentState extends State<ProductDetailContent> {
           Container(
             margin: EdgeInsets.only(bottom: 18),
             child: Text(
-              "Queso Barmeludo Tolo 200gr",
+              widget.product.name,
               style: TextStyle(
                   fontSize: 24.0,
                   fontFamily: "Lato",
@@ -117,41 +124,41 @@ class _ProductDetailContentState extends State<ProductDetailContent> {
           Container(
             margin: EdgeInsets.symmetric(vertical: 2.0),
             child: Text(
-              "Marca: Lácteos Bármelas",
+              "Marca: ${widget.product.brand}",
               style: TextStyle(
-                  fontSize: 22.0, fontFamily: "Lato", color: Colors.black87),
+                  fontSize: 18.0, fontFamily: "Lato", color: Colors.black87),
             ),
           ),
           Container(
             margin: EdgeInsets.symmetric(vertical: 2.0),
             child: Text(
-              "Precio: \$ 7.690",
+              "${widget.product.price}",
               style: TextStyle(
-                  fontSize: 22.0, fontFamily: "Lato", color: Colors.black87),
+                  fontSize: 18.0, fontFamily: "Lato", color: Colors.black87),
             ),
           ),
           Container(
             margin: EdgeInsets.symmetric(vertical: 2.0),
             child: Text(
-              "Categoría: Lácteos y refrigerados",
+              "Categoría: ${widget.product.category}",
               style: TextStyle(
-                  fontSize: 22.0, fontFamily: "Lato", color: Colors.black87),
+                  fontSize: 18.0, fontFamily: "Lato", color: Colors.black87),
             ),
           ),
           Container(
             margin: EdgeInsets.symmetric(vertical: 2.0),
             child: Text(
-              "PLU: 770554647963",
+              "PLU: ${widget.product.barcode}",
               style: TextStyle(
-                  fontSize: 22.0, fontFamily: "Lato", color: Colors.black87),
+                  fontSize: 18.0, fontFamily: "Lato", color: Colors.black87),
             ),
           ),
           Container(
             margin: EdgeInsets.symmetric(vertical: 2.0),
             child: Text(
-              "IVA: 19%",
+              "IVA: ${widget.product.iva}",
               style: TextStyle(
-                  fontSize: 22.0, fontFamily: "Lato", color: Colors.black87),
+                  fontSize: 18.0, fontFamily: "Lato", color: Colors.black87),
             ),
           ),
         ],

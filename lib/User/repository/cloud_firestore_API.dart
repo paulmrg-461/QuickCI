@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:quick_ci/Product/model/product.dart';
 import 'package:quick_ci/Product/ui/widgets/card_product.dart';
+import 'package:quick_ci/Product/ui/widgets/product_detail_content.dart';
 import 'package:quick_ci/User/model/user.dart';
 
 class CloudFirestoreAPI {
@@ -33,5 +34,22 @@ class CloudFirestoreAPI {
           quantity: p.data["quantity"].toString())));
     });
     return cardProducts;
+  }
+
+  List<ProductDetailContent> buildProductByBarcode(
+      List<DocumentSnapshot> productByBarcodeSnapshot) {
+    List<ProductDetailContent> productByBarcode = List<ProductDetailContent>();
+    productByBarcodeSnapshot.forEach((pb) {
+      productByBarcode.add(ProductDetailContent(Product(
+          name: pb.data["name"],
+          barcode: pb.data["barcode"].toString(),
+          price: pb.data["price"],
+          photoUrl: pb.data["name"],
+          quantity: pb.data["quantity"].toString(),
+          brand: pb.data["brand"],
+          category: pb.data["category"],
+          iva: pb.data["iva"])));
+    });
+    return productByBarcode;
   }
 }

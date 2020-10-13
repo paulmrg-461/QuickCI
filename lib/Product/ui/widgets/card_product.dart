@@ -7,34 +7,31 @@ class CardProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => print("Hola amiguis: ${product.name}"),
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 18.0, vertical: 6.0),
-        padding: EdgeInsets.all(12.0),
-        width: double.infinity,
-        //height: _screenSize.height * 0.12,
-        height: 110.0,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16.0),
-            shape: BoxShape.rectangle,
-            boxShadow: <BoxShadow>[
-              BoxShadow(
-                  color: Colors.black38,
-                  blurRadius: 15.0,
-                  offset: Offset(0.0, 7.0))
-            ],
-            gradient: LinearGradient(
-                colors: [
-                  Color(0xFFFFFFFF), //arriba
-                  Color(0xFFF5F5F5) //bajo
-                ],
-                begin: FractionalOffset(0.2, 0.0),
-                end: FractionalOffset(1.0, 0.6),
-                stops: [0.0, 0.6],
-                tileMode: TileMode.clamp)),
-        child: _cardProductInformation(context),
-      ),
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 18.0, vertical: 6.0),
+      padding: EdgeInsets.all(12.0),
+      width: double.infinity,
+      //height: _screenSize.height * 0.12,
+      height: 110.0,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16.0),
+          shape: BoxShape.rectangle,
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+                color: Colors.black38,
+                blurRadius: 15.0,
+                offset: Offset(0.0, 7.0))
+          ],
+          gradient: LinearGradient(
+              colors: [
+                Color(0xFFFFFFFF), //arriba
+                Color(0xFFF5F5F5) //bajo
+              ],
+              begin: FractionalOffset(0.2, 0.0),
+              end: FractionalOffset(1.0, 0.6),
+              stops: [0.0, 0.6],
+              tileMode: TileMode.clamp)),
+      child: _cardProductInformation(context),
     );
   }
 
