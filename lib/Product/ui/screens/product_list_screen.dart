@@ -4,9 +4,9 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:quick_ci/Product/model/product.dart';
 import 'package:quick_ci/Product/ui/screens/product_content.dart';
-import 'package:quick_ci/Product/ui/screens/product_detail_screen.dart';
 import 'package:quick_ci/Product/ui/screens/product_header.dart';
 import 'package:quick_ci/User/bloc/user_bloc.dart';
+import 'package:quick_ci/User/repository/cloud_firestore_API.dart';
 
 class ProductListScreen extends StatefulWidget {
   @override
@@ -14,6 +14,7 @@ class ProductListScreen extends StatefulWidget {
 }
 
 UserBloc userBloc;
+CloudFirestoreAPI cloudFirestoreAPI = CloudFirestoreAPI();
 Product product;
 
 class _ProductListScreenState extends State<ProductListScreen> {
@@ -29,10 +30,11 @@ class _ProductListScreenState extends State<ProductListScreen> {
     }
     if (!mounted) return;
     if (int.parse(barcodeScanRes) > 1) {
-      Navigator.push(
+      cloudFirestoreAPI.buildProductById(barcodeScanRes, context);
+      /* Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => ProductDetailScreen(barcodeScanRes)));
+              builder: (context) => ProductDetailScreen(barcodeScanRes))); */
     }
 
     setState(() {

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:generic_bloc_provider/generic_bloc_provider.dart';
-import 'package:quick_ci/User/bloc/user_bloc.dart';
+import 'package:quick_ci/Product/model/product.dart';
+import 'package:quick_ci/Product/ui/screens/product_content.dart';
+import 'package:quick_ci/Product/ui/widgets/product_detail_content.dart';
+import 'package:quick_ci/User/repository/cloud_firestore_API.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   String barcode;
@@ -8,7 +10,14 @@ class ProductDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    UserBloc userBloc = BlocProvider.of<UserBloc>(context);
+    CloudFirestoreAPI cloudFirestoreAPI = CloudFirestoreAPI();
+    //cloudFirestoreAPI.buildProductById(barcode);
+    return Scaffold(
+      body: Text("TOLOWER"),
+    );
+  }
+}
+/* UserBloc userBloc = BlocProvider.of<UserBloc>(context);
 
     return StreamBuilder(
         stream: userBloc.productByBarcode(barcode),
@@ -40,5 +49,4 @@ class ProductDetailScreen extends StatelessWidget {
               break;
           }
         });
-  }
-}
+  } */

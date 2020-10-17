@@ -38,14 +38,12 @@ class UserBloc implements Bloc {
           isEqualTo: Firestore.instance.document("products/${barcode}"))
       .snapshots(); */
 
-  Stream<QuerySnapshot> productByBarcode(String barcode) => Firestore.instance
-      .collection("products")
-      .where("barcode", isEqualTo: barcode)
-      .snapshots();
+  /* Stream<DocumentSnapshot> productByBarcode(String barcode) =>
+      Firestore.instance.collection("products").document(barcode).snapshots(); */
 
-  List<ProductDetailContent> buildProductByBarcode(
+/*   List<ProductDetailContent> buildProductByBarcode(
           List<DocumentSnapshot> productByBarcodeSnapshot) =>
-      _cloudFirestoreRepository.buildProductByBarcode(productByBarcodeSnapshot);
+      _cloudFirestoreRepository.buildProductByBarcode(productByBarcodeSnapshot); */
   /* Stream<QuerySnapshot> get productByBarcodeStream => productByBarcode(barcode);
   
  */

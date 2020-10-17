@@ -1,9 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:quick_ci/Product/model/product.dart';
+import 'package:quick_ci/Product/ui/screens/product_list_screen.dart';
 import 'package:quick_ci/Product/ui/widgets/card_product.dart';
 import 'package:quick_ci/Product/ui/widgets/product_detail_content.dart';
 import 'package:quick_ci/User/model/user.dart';
+import 'package:quick_ci/widgets/alert_dialog.dart';
+import 'package:toast/toast.dart';
 
 class CloudFirestoreAPI {
   final String USERS = "users";
@@ -36,20 +41,37 @@ class CloudFirestoreAPI {
     return cardProducts;
   }
 
-  List<ProductDetailContent> buildProductByBarcode(
-      List<DocumentSnapshot> productByBarcodeSnapshot) {
-    List<ProductDetailContent> productByBarcode = List<ProductDetailContent>();
-    productByBarcodeSnapshot.forEach((pb) {
-      productByBarcode.add(ProductDetailContent(Product(
-          name: pb.data["name"],
-          barcode: pb.data["barcode"].toString(),
-          price: pb.data["price"],
-          photoUrl: pb.data["name"],
-          quantity: pb.data["quantity"].toString(),
-          brand: pb.data["brand"],
-          category: pb.data["category"],
-          iva: pb.data["iva"])));
+  buildProductById(String barcode, BuildContext context) {
+    Product product;
+    _db
+        .collection("products")
+        .document(barcode)
+        .get()
+        .then((DocumentSnapshot snapshot) {
+      try {
+        product = Product(
+            name: snapshot.data["name"],
+            brand: snapshot.data["brand"],
+            photoUrl: snapshot.data["name"],
+            category: snapshot.data["category"],
+            iva: snapshot.data["iva"],
+            barcode: snapshot.data["barcode"].toString(),
+            price: snapshot.data["price"]);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ProductDetailContent(product)));
+      } catch (e) {
+        Toast.show(
+            "Lo sentimos, el producto aún no ha sido registrado en la base de datos. Por favor intenta más tarde.",
+            context,
+            duration: Toast.LENGTH_LONG,
+            gravity: Toast.BOTTOM);
+        /* showAlertDialog(context, "Aceptar", "El producto no existe",
+            "Lo sentimos, el producto aún no ha sido registrado en la base de datos. Por favor intenta más tarde."); */
+
+        print("Ha ocurrido un error en la lectura del producto. $e");
+      }
     });
-    return productByBarcode;
   }
 }

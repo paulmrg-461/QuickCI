@@ -4,7 +4,7 @@ class CounterButton extends StatefulWidget {
   final String text;
   final double radius;
   final VoidCallback onPressed;
-  int price = 7690;
+  final int price;
   int total = 0;
   int quantity = 1;
 
@@ -12,7 +12,8 @@ class CounterButton extends StatefulWidget {
       {Key key,
       @required this.text,
       @required this.onPressed,
-      @required this.radius});
+      @required this.radius,
+      @required this.price});
 
   @override
   _CounterButtonState createState() => _CounterButtonState();

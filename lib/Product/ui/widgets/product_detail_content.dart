@@ -22,9 +22,11 @@ class _ProductDetailContentState extends State<ProductDetailContent> {
             margin: EdgeInsets.only(
                 bottom: MediaQuery.of(context).size.height * 0.45),
             child: CounterButton(
-                text: "Cantidad",
-                onPressed: () => print("Hola Amiguis"),
-                radius: 30))
+              text: "Cantidad",
+              onPressed: () => print("Hola Amiguis"),
+              radius: 30,
+              price: widget.product.price,
+            ))
       ],
     );
   }
@@ -132,7 +134,7 @@ class _ProductDetailContentState extends State<ProductDetailContent> {
           Container(
             margin: EdgeInsets.symmetric(vertical: 2.0),
             child: Text(
-              "${widget.product.price}",
+              "\$ ${widget.product.price}",
               style: TextStyle(
                   fontSize: 18.0, fontFamily: "Lato", color: Colors.black87),
             ),
